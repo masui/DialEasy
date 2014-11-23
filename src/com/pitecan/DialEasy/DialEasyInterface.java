@@ -1,3 +1,6 @@
+//
+// JavaScriptから呼ばれるクラス
+//
 package com.pitecan.DialEasy;
 
 import android.content.Context;
