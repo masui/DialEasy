@@ -8,17 +8,41 @@ function dial(number){
 }
 </script>
 <style type="text/css">
-<!--
-input {
-  width: 200;
-  height: 200;
-  font-size:30;
+buttonxx {
+  color: #ffff00;
+  width: 50%;
+  height: 200pt;
+  font-size: 40pt;
 }
--->
+.css3_button{
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color:#FFFFFF;
+  text-shadow:1px 1px 1px rgba(0, 0, 0, 0.5),-1px -1px 1px rgba(255, 255, 255, 0.5);
+  background:-moz-linear-gradient(top, #cedcf3, #0066FF 30%, #0066FF 50%, #0066FF 75%, #0066FF);
+  background:-webkit-gradient(linear, left top, left bottom, from(#cedcf3), color-stop(0.3, #0066FF), color-stop(0.5, #0066FF), color-stop(0.75, #0066FF), to(#0066FF));
+  width:96px;
+  height:98px;
+  line-height:98px;
+  border-style:solid;border-color:#0066FF;
+  border-width:0px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  -webkit-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  -moz-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  background-repeat: no-repeat;
+  font-size: 14pt;
+}
 </style>
 <title>DialEasy</title>
 </head>
+
 <body style="background-color:#ffffdd;">
-<input label="増井" type="button" value="増井" onclick="dial('0467235838')" style="font-size:50pt;height:100pt;">
+<button class="css3_button" onclick="dial('08023881513')" style="background-image: url('toshiyuki.png')"></button>
+<button class="css3_button" onclick="dial('08000000000')" style="background-image: url('madoka.png')"></button>
+<button class="css3_button" onclick="dial('0467235838')" style="background-image: url('kamakura.png')"></button>
 </body>
 </html>
