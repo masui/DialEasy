@@ -2,9 +2,84 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>DialEasy</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="data.js"></script>
 <script type="text/javascript">
+
+var pageno;
+var orientationX = ""; // "orientation" という変数名にすると動かない
+var timeout;
+
+$(function(){
+  alert(data);
+  for(i=0;i<data.length;i++){
+    button = $('<button>');
+    button.attr('class','button');
+    button.attr('onclick',"dial('"+data[i][1]+"')");
+    button.css('background-image',"url('"+data[i][0]+".png')");
+    $('#page1_portrait').append(button);
+  }
+  button = $('<button>');
+  button.attr('class','button');
+  button.attr('onclick',"showpage(2)");
+  button.css('background-image',"url('tenkey.png')");
+  $('#page1_portrait').append(button);
+
+  //var csv = $.csv()(data);
+  //indexを使ってくり返し回数をカウントします
+  //alert(csv.length);
+  //$(csv).each(function(index){
+  //   alert(this[0]);
+  //})
+
+  pageno = 1;
+  orientationX = "portrait";
+  showpage(1);
+
+});
+
+function debug(s){
+  $('#debug').text(s);
+}
+
+function showpage(pagenum){
+  if(pagenum != 1){
+    timeout = setTimeout(function(){ showpage(1); }, 10000);
+  }
+  for(i=1;i<=2;i++){
+    if(i == pagenum){
+      $('#page'+i+"_"+orientationX).css('display','block');
+    }
+    else {
+      $('#page'+i+"_"+orientationX).css('display','none');
+    }
+  }
+}
+
 function dial(number){
   DialEasy.dial(number);
+}
+
+function enter(number){
+  clearTimeout(timeout);
+  timeout = setTimeout(function(){ showpage(1); }, 10000);
+  curnum = $('#phonenumber').attr('value');
+  curnum = curnum + String(number);
+  $('#phonenumber').attr('value',curnum);
+}
+
+function back(){
+  clearTimeout(timeout);
+  curnum = $('#phonenumber').attr('value');
+  if(curnum == ""){
+    showpage(1);
+  }
+  else {
+    timeout = setTimeout(function(){ showpage(1); }, 10000);
+    curnum = curnum.replace(/.$/,'');
+    $('#phonenumber').attr('value',curnum);
+  }
 }
 </script>
 <style type="text/css">
@@ -14,7 +89,7 @@ buttonxx {
   height: 200pt;
   font-size: 40pt;
 }
-.css3_button{
+.button{
   display: inline-block;
   text-align: center;
   text-decoration: none;
@@ -23,13 +98,82 @@ buttonxx {
   background:-moz-linear-gradient(top, #cedcf3, #0066FF 30%, #0066FF 50%, #0066FF 75%, #0066FF);
   background:-webkit-gradient(linear, left top, left bottom, from(#cedcf3), color-stop(0.3, #0066FF), color-stop(0.5, #0066FF), color-stop(0.75, #0066FF), to(#0066FF));
   width:96px;
-  height:98px;
-  line-height:98px;
+  height:96px;
+  line-height:96px;
   border-style:solid;border-color:#0066FF;
   border-width:0px;
-  -webkit-border-radius:5px;
-  -moz-border-radius:5px;
-  border-radius:5px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  -webkit-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  -moz-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  background-repeat: no-repeat;
+  font-size: 14pt;
+}
+.phonenumber {
+  font-size:20pt;
+}
+.tsuuwa{
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color:#FFFFFF;
+  text-shadow:1px 1px 1px rgba(0, 0, 0, 0.5),-1px -1px 1px rgba(255, 255, 255, 0.5);
+  background:-moz-linear-gradient(top, #cedcf3, #0066FF 30%, #0066FF 50%, #0066FF 75%, #0066FF);
+  background:-webkit-gradient(linear, left top, left bottom, from(#cedcf3), color-stop(0.3, #0066FF), color-stop(0.5, #0066FF), color-stop(0.75, #0066FF), to(#0066FF));
+  width:88px;
+  height:40px;
+  line-height:40px;
+  border-style:solid;border-color:#0066FF;
+  border-width:0px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  -webkit-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  -moz-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  background-repeat: no-repeat;
+  font-size: 14pt;
+}
+.tenkey_portrait{
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color:#FFFFFF;
+  text-shadow:1px 1px 1px rgba(0, 0, 0, 0.5),-1px -1px 1px rgba(255, 255, 255, 0.5);
+  background:-moz-linear-gradient(top, #cedcf3, #0066FF 30%, #0066FF 50%, #0066FF 75%, #0066FF);
+  background:-webkit-gradient(linear, left top, left bottom, from(#cedcf3), color-stop(0.3, #0066FF), color-stop(0.5, #0066FF), color-stop(0.75, #0066FF), to(#0066FF));
+  width:96px;
+  height:96px;
+  line-height:96px;
+  border-style:solid;border-color:#0066FF;
+  border-width:0px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  -webkit-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  -moz-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
+  background-repeat: no-repeat;
+  font-size: 14pt;
+}
+.tenkey_landscape{
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color:#FFFFFF;
+  text-shadow:1px 1px 1px rgba(0, 0, 0, 0.5),-1px -1px 1px rgba(255, 255, 255, 0.5);
+  background:-moz-linear-gradient(top, #cedcf3, #0066FF 30%, #0066FF 50%, #0066FF 75%, #0066FF);
+  background:-webkit-gradient(linear, left top, left bottom, from(#cedcf3), color-stop(0.3, #0066FF), color-stop(0.5, #0066FF), color-stop(0.75, #0066FF), to(#0066FF));
+  width:84px;
+  height:84px;
+  line-height:84px;
+  border-style:solid;border-color:#0066FF;
+  border-width:0px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
   -webkit-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
   -moz-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
   box-shadow:5px 5px 5px rgba(0, 0, 0, 0.30000000000000004),inset 0px 0px 0px rgba(255, 255, 255, 0);
@@ -37,12 +181,37 @@ buttonxx {
   font-size: 14pt;
 }
 </style>
-<title>DialEasy</title>
 </head>
 
-<body style="background-color:#ffffdd;">
-<button class="css3_button" onclick="dial('08023881513')" style="background-image: url('toshiyuki.png')"></button>
-<button class="css3_button" onclick="dial('08000000000')" style="background-image: url('madoka.png')"></button>
-<button class="css3_button" onclick="dial('0467235838')" style="background-image: url('kamakura.png')"></button>
+<body style="background-color:#09B088;">
+<!-- <span id="debug">debug</span> -->
+<div class="page" id="page1_portrait">
+  <!--
+  <button class="button" onclick="dial('08023881513')" style="background-image: url('toshiyuki.png')"></button>
+  <button class="button" onclick="dial('08050652462')" style="background-image: url('madoka.png')"></button>
+  <button class="button" onclick="dial('09093488418')" style="background-image: url('kento.png')"></button>
+  <button class="button" onclick="dial('0467235838')" style="background-image: url('kamakura.png')"></button>
+  <button class="button" onclick="dial('0789616788')" style="background-image: url('mihoko.png')"></button>
+  <button class="button" onclick="showpage(2)" style="background-image: url('tenkey.png')"></button>
+  -->
+</div>
+<div class="page" id="page2_portrait">
+  <form>
+    <input type="text" id="phonenumber" class="phonenumber" value="080" size=10></input>
+  </form>
+  <div style="height:10pt;">　</div>
+  <button class="tenkey_portrait" onclick="enter(1)" style="background-image: url('1.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(2)" style="background-image: url('2.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(3)" style="background-image: url('3.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(4)" style="background-image: url('4.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(5)" style="background-image: url('5.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(6)" style="background-image: url('6.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(7)" style="background-image: url('7.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(8)" style="background-image: url('8.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(9)" style="background-image: url('9.png')"></button>
+  <button class="tenkey_portrait" onclick="enter(0)" style="background-image: url('0.png')"></button>
+  <button class="tenkey_portrait" onclick="back()" style="background-image: url('modoru.png')"></button>
+  <button class="tenkey_portrait" onclick="dial($('#phonenumber').attr('value'))" style="background-image: url('tsuuwa.png')"></button>
+</div>
 </body>
 </html>
