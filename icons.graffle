@@ -10946,7 +10946,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-11-24 12:30:05 +0000</string>
+	<string>2014-11-24 12:56:06 +0000</string>
 	<key>Modifier</key>
 	<string>増井 俊之</string>
 	<key>NotesVisible</key>
@@ -11036,7 +11036,7 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{15, 0}, {545, 724}}</string>
+		<string>{{4, 6}, {545, 724}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
