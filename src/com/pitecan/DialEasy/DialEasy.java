@@ -32,13 +32,5 @@ public class DialEasy extends Activity {
 
         //WebViewにページを読み込み
         wv.loadUrl("file:///android_asset/index.html");
-
-    }
-
-    public void dial(String number) {
-	Intent intent = new Intent(); 
-	intent.setAction(Intent.ACTION_CALL); 
-	intent.setData(Uri.parse("tel:"+number)); 
-	startActivity(intent);
     }
 }

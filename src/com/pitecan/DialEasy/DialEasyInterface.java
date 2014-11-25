@@ -11,15 +11,17 @@ import android.net.Uri;
 import android.app.Activity;
 
 public class DialEasyInterface {
-    Context context;
+    Activity activity;
     
-    public DialEasyInterface(Context c) {
-	this.context = c;
+    public DialEasyInterface(Activity a) {
+	this.activity = a;
     }
     
     public void dial(String number)
     {
-	DialEasy de = (DialEasy)(this.context);
-	de.dial(number);
+	Intent intent = new Intent(); 
+	intent.setAction(Intent.ACTION_CALL); 
+	intent.setData(Uri.parse("tel:"+number)); 
+	activity.startActivity(intent);
     }
 }
