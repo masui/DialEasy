@@ -1,3 +1,6 @@
+//
+// WebViewを開いてそのJSからJavaをアクセス可能にする
+//
 package com.pitecan.DialEasy;
 
 import android.app.Activity;
